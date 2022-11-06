@@ -4,6 +4,7 @@ async function onSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const { email, password, rePass } = Object.fromEntries(formData.entries());
+    
     try {
 
         if(!email || !password){
