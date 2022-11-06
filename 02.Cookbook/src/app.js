@@ -53,20 +53,22 @@ async function onLogout() {
             'X-Authorization': sessionStorage.getItem('authToken')
         },
     });
+
     if (response.status == 200) {
         sessionStorage.removeItem('authToken');
-        window.location.pathname = 'index.html';
+        window.location = 'index.html';
     } else {
         console.error(await response.json());
     }
 }
 
+// checking on page load if the client is logged in or not
 window.addEventListener('load', async () => {
     if (sessionStorage.getItem('authToken') != null) {
-        document.getElementById('user').style.display = 'inline-block';
+        document.getElementById('user').style.display = 'inline-block'; // showing the Create Recipe and the Logout button if the user is logged in
         document.getElementById('logoutBtn').addEventListener('click', onLogout);
     } else {
-        document.getElementById('guest').style.display = 'inline-block';
+        document.getElementById('guest').style.display = 'inline-block'; // showing the Register and the Login if the suer is not logged in
     }
 
     const main = document.querySelector('main');
